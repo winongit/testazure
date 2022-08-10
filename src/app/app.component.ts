@@ -1,0 +1,13 @@
+import { AuthService } from './core/services/authservice/auth.service';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+  title = 'auction-frontend';
+
+  constructor(public authService: AuthService) {}
+}

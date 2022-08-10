@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Create Auction</h1>
+
+    <div class="example-container">
+        <form [formGroup]="auctionForm">
+            <mat-form-field appearance="standard">
+                <mat-label>Auction Title</mat-label>
+                <input matInput formControlName="title" placeholder="Auction Title">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label>Price</mat-label>
+                <input matInput type="number" formControlName="price" placeholder="Price">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label>Category</mat-label>
+                <input matInput formControlName="category" placeholder="category">
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label>Auction End Time</mat-label>
+                <input matInput type="datetime-local" formControlName="end_time" placeholder="end time">
+                <mat-error *ngIf="auctionForm.controls['end_time'].errors">{{auctionForm.controls['end_time'].errors['invalidDate']}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+        </form> 
+        <form>
+            <input type="file"
+                id="fileInput"
+                name="fileInput"
+                accept="image/*" multiple 
+                (change)="selectFiles($event)"
+            />
+        </form>
+        <div style="margin-bottom: 10px;">
+            <img *ngFor='let preview of previews' [src]="preview" class="preview">
+        </div>
+    </div>
+
+
+<button mat-raised-button color="primary" (click)="save()" style="margin-right: 10px"
+    [disabled]="!auctionForm.valid || !imageSelect">
+    <mat-icon>save</mat-icon> Announce
+</button>
+
+<button mat-raised-button color="secondary" (click)="dismiss()">
+    <mat-icon>cancel</mat-icon> Cancel
+</button>

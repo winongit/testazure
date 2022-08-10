@@ -1,0 +1,57 @@
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image" style="background-image: url({{auction.created_by.imgUrl}});"></div>
+        <mat-card-title>{{auction.title}}</mat-card-title>
+        <mat-card-subtitle>{{auction.category}}</mat-card-subtitle>
+
+    </mat-card-header>
+    
+    <img mat-card-image src='{{auction.imgUrl}}' alt="Photo of a Shiba Inu">
+
+    <mat-card-content>
+        <h3>Current Bid - {{auction.price | currency}}</h3>
+        <p>
+            {{auction.description}}
+        </p>
+        <h4>End in - {{auction.end_time | date:'medium'}}</h4>
+    </mat-card-content>
+
+    <mat-card-actions class="auction-action">
+        <form [formGroup]="bidForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Bid Amount</mat-label>
+            <input matInput  type="number" formControlName="bid_amount">
+          </mat-form-field>
+        
+        <button mat-raised-button color="primary" (click)="bid()" [disabled]="!bidForm.valid || !buttonDisable">Bid</button> 
+        </form>
+    </mat-card-actions>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+        <ng-container matColumnDef="bid_amount">
+        <th mat-header-cell *matHeaderCellDef > Bid Amount </th>
+        <td mat-cell *matCellDef="let bid"> {{bid.bid_amount | currency }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="updated_at">
+        <th mat-header-cell *matHeaderCellDef> Submitted Date Time </th>
+        <td mat-cell *matCellDef="let bid"> {{bid.created_at | date:'medium'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="can_delete">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let bid"> 
+                <button mat-mini-fab color="warn" *ngIf="bid.can_delete">
+                    <mat-icon (click)="deleteBid(bid)">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>   
+    </table>
+       
+      
+ </mat-card>
+
+ 

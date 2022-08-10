@@ -1,0 +1,2 @@
+<app-sidenav *ngIf="authService.isLoggedIn()"></app-sidenav>
+<router-outlet *ngIf="!authService.isLoggedIn()"></router-outlet>

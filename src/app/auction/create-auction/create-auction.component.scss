@@ -1,0 +1,18 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-container > * {
+    width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+  
+}
+
+.preview {
+    max-width: 100%;
+    vertical-align: middle;
+  }

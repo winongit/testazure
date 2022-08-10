@@ -1,0 +1,39 @@
+
+<h2 mat-dialog-title>Extend Auction</h2>
+<mat-dialog-content>
+    <mat-card class="auction-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image" style="background-image: url({{auction.created_by.imgUrl}});"></div>
+            <mat-card-title>{{auction.title}}</mat-card-title>
+            <mat-card-subtitle>{{auction.category}}</mat-card-subtitle>
+
+        </mat-card-header>
+        
+        <img mat-card-image src='{{auction.imgUrl}}' alt="{{auction.title}}">
+
+        <mat-card-content class="auction-desc">
+            <h3>Current Bid - {{auction.price | currency}}</h3>
+            <p>
+                {{auction.description}}
+            </p>
+            <h4>End in - {{auction.end_time | date:'medium'}}</h4>
+
+            <form [formGroup]="auctionExtendForm">
+                <mat-form-field appearance="standard">
+                    <mat-label>New Auction End Time</mat-label>
+                    <input matInput type="datetime-local" formControlName="new_end_time" placeholder="end time">
+                    <mat-error *ngIf="auctionExtendForm.controls['new_end_time'].errors">{{auctionExtendForm.controls['new_end_time'].errors['invalidDate']}}</mat-error>
+                </mat-form-field>
+            </form>
+
+        </mat-card-content>
+
+       
+    </mat-card>
+</mat-dialog-content>
+
+<button mat-raised-button color="primary" (click)="extend(auction)" [disabled]="!auctionExtendForm.valid"> Extend</button>
+
+<button mat-button color="secondary" (click)="dismiss()">
+    Cancel
+</button>

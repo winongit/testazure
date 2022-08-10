@@ -1,0 +1,25 @@
+<div class="auction-card-list">
+  <mat-card class="auction-card" *ngFor="let auction of auctions">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image" style="background-image: url({{auction.created_by.imgUrl}});"></div>
+      <mat-card-title>{{ auction.title }}</mat-card-title>
+      <mat-card-subtitle>{{ auction.category }}</mat-card-subtitle>
+    </mat-card-header>
+    
+    <img
+      mat-card-image
+      src="{{ auction.imgUrl }}"
+      alt="{{ auction.title }}"
+    />
+
+    <mat-card-content class="auction-desc">
+      <h4>Original Price - {{ auction.price | currency }}</h4>
+      <h4 *ngIf="auction.winning">You are the winner</h4>
+      <h4>Your Bid - {{ auction.max_bid_amount | currency }}</h4>
+      <p>
+        {{ auction.description }}
+      </p>
+      <h4>End in - {{ auction.end_time | date: "medium" }}</h4>
+    </mat-card-content>
+  </mat-card>
+</div>
